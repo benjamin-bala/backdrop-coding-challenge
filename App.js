@@ -2,6 +2,7 @@ import React, {useEffect, useReducer} from 'react';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import Navigation from './src/Navigation';
 import axios from 'axios';
+import {storeData} from './src/utils/cache';
 
 const initialState = {
   status: 'idle',
@@ -27,26 +28,8 @@ function reducer(state, action) {
       return {...initialState, status: 'error', error: action.payload};
     case ACTIONS.like:
       let newData = action.payload;
-      let alreadyInFavourite = false;
-
-      state.favourite.forEach(item => {
-        if (item.id === newData.id) {
-          alreadyInFavourite = true;
-        }
-      });
-      if (!alreadyInFavourite) {
-        return {
-          ...state,
-          favourite: [...state.favourite, action.payload],
-        };
-      } else {
-        return {
-          ...state,
-          favourite: state.favourite.filter(item => {
-            return item.id !== newData.id;
-          }),
-        };
-      }
+      storeData(newData);
+      return state;
 
     default:
       return state;
@@ -57,8 +40,6 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const url = 'https://api.thecatapi.com/v1/breeds';
-
-  console.log(state);
 
   useEffect(() => {
     if (!url) return;
