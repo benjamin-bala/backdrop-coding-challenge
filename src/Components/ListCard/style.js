@@ -16,10 +16,10 @@ export const listStyle = StyleSheet.create({
     color: '#000',
   },
   thumbnail: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     borderRadius: 10,
-    backgroundColor: '#777',
+    backgroundColor: '#eaeaea',
     marginRight: 10,
   },
 });

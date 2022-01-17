@@ -5,13 +5,10 @@ import Home from './Pages/Home';
 import Favourite from './Pages/Favourite';
 import Cat from './assets/icons/cat';
 import Heart from './assets/icons/heart';
-import fetcher from './utils/fetcher';
 
 const Tab = createBottomTabNavigator();
 
-export default function Navigation() {
-  const {data, status} = fetcher('https://api.thecatapi.com/v1/breeds');
-
+export default function Navigation(props) {
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -41,12 +38,16 @@ export default function Navigation() {
         <Tab.Screen
           options={{headerShown: false}}
           name="All cats"
-          children={() => <Home data={data} status={status} />}
+          children={() => (
+            <Home state={props.state} dispatch={props.dispatch} />
+          )}
         />
         <Tab.Screen
           options={{headerShown: false}}
           name="Cats i like"
-          component={Favourite}
+          children={() => (
+            <Favourite state={props.state} dispatch={props.dispatch} />
+          )}
         />
       </Tab.Navigator>
     </NavigationContainer>

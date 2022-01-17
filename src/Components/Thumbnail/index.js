@@ -1,16 +1,24 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import Heart from '../../assets/icons/heart';
 import {thumbnailStyle} from './style';
 
-export default function Thumbnail() {
+export default function Thumbnail({item}) {
   return (
     <View style={thumbnailStyle.thumbnailContainer}>
       <View style={thumbnailStyle.thumbnail}>
-        <Text style={{color: 'red'}}>s</Text>
+        {item.image && (
+          <Image
+            style={thumbnailStyle.thumbnail}
+            source={{
+              uri: item.image.url,
+            }}
+            resizeMode={'cover'}
+          />
+        )}
       </View>
       <View style={thumbnailStyle.textbox}>
-        <Text style={thumbnailStyle.text}>Abytsssasas</Text>
+        <Text style={thumbnailStyle.text}>{item.name}</Text>
         <Heart fill="#DE0202" outline="#DE0202" />
       </View>
     </View>
