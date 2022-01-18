@@ -2,7 +2,7 @@ import React, {useEffect, useReducer} from 'react';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import Navigation from './src/Navigation';
 import axios from 'axios';
-import {storeData} from './src/utils/cache';
+import {retriveData, storeData} from './src/utils/cache';
 
 const initialState = {
   status: 'idle',
@@ -16,6 +16,7 @@ export const ACTIONS = {
   fetched: 'FETCHED',
   fetch_error: 'FETCH_ERROR',
   like: 'FAVOURITE',
+  retrive_favourite: 'GET_FAVOURITE',
 };
 
 function reducer(state, action) {
@@ -30,7 +31,11 @@ function reducer(state, action) {
       let newData = action.payload;
       storeData(newData);
       return state;
-
+    case ACTIONS.retrive_favourite:
+      return {
+        ...state,
+        favourite: action.payload,
+      };
     default:
       return state;
   }

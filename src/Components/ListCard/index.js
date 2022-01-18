@@ -6,7 +6,7 @@ import {listStyle} from './style';
 export default function ListCard({item}, dispatch, state) {
   let liked = false;
 
-  state.favourite.filter(catitem => (liked = catitem.id === item.id));
+  // state.favourite.filter(catitem => (liked = catitem.id === item.id));
 
   return (
     <View style={listStyle.card}>

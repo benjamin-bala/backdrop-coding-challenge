@@ -15,11 +15,8 @@ export const storeData = async data => {
       likeCat = likedCat.filter(_likecat => _likecat.id !== data.id);
     }
 
-    console.log('liked cat', likedCat);
-
     return AsyncStorage.setItem('favourite', JSON.stringify(likedCat));
   });
-  console.log('Item added');
 };
 
 export const retriveData = async () => {
