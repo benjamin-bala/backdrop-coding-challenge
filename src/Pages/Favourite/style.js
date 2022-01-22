@@ -6,4 +6,9 @@ export const favouriteStyle = StyleSheet.create({
     flex: 1,
     padding: 25,
   },
+  emptyComponent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

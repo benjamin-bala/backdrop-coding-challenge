@@ -3,10 +3,14 @@ import {View, Text, Image, TouchableHighlight} from 'react-native';
 import Heart from '../../assets/icons/heart';
 import {listStyle} from './style';
 
-export default function ListCard({item}, dispatch, state) {
+export default function ListCard({item, dispatch, state}) {
   let liked = false;
 
-  // state.favourite.filter(catitem => (liked = catitem.id === item.id));
+  state.likeId.filter(catitem => {
+    if (item.id === catitem) {
+      liked = true;
+    }
+  });
 
   return (
     <View style={listStyle.card}>
@@ -26,19 +30,14 @@ export default function ListCard({item}, dispatch, state) {
           <Text style={listStyle.text}>{item.name}</Text>
         </View>
       </View>
-      {liked ? (
-        <TouchableHighlight
-          onPress={() => dispatch({type: 'FAVOURITE', payload: item})}
-          style={listStyle.like}>
-          <Heart fill="red" stroke="red" />
-        </TouchableHighlight>
-      ) : (
-        <TouchableHighlight
-          onPress={() => dispatch({type: 'FAVOURITE', payload: item})}
-          style={listStyle.like}>
-          <Heart fill="none" stroke="#E5E5E5" />
-        </TouchableHighlight>
-      )}
+      <TouchableHighlight
+        onPress={() => dispatch({type: 'FAVOURITE', payload: item})}
+        style={listStyle.like}>
+        <Heart
+          fill={liked ? 'red' : 'none'}
+          stroke={liked ? 'red' : '#E5E5E5'}
+        />
+      </TouchableHighlight>
     </View>
   );
 }

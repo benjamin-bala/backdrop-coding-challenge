@@ -6,49 +6,42 @@ import {favouriteStyle} from './style';
 import {retriveData} from '../../utils/cache';
 
 export default function Favourite(props) {
-  const nullvalue = 0;
   const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    getData();
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
   const wait = timeout => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   };
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    retriveData(props.dispatch);
+    wait(300).then(() => setRefreshing(false));
+  }, []);
 
-  const getData = () => {
-    let data = retriveData();
-    data.then(item => {
-      props.dispatch({type: 'GET_FAVOURITE', payload: JSON.parse(item)});
-    });
-  };
-
-  useEffect(() => {
-    getData();
-  }, [nullvalue]);
+  function emptyComponent() {
+    return (
+      <View style={favouriteStyle.emptyComponent}>
+        <Text>You don't have a favourite cat</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={favouriteStyle.favouriteContainer}>
       <TitleText text="Cats i like" />
-      {props.state.favourite.length > 0 ? (
-        <FlatList
-          data={props.state.favourite}
-          numColumns={2}
-          keyExtractor={item => item.id}
-          renderItem={Thumbnail}
-          columnWrapperStyle={{
-            flex: 1,
-            justifyContent: 'space-between',
-          }}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-        />
-      ) : (
-        <Text>You don't have a favourite cat</Text>
-      )}
+      <FlatList
+        data={props.state.favourite}
+        numColumns={2}
+        keyExtractor={item => item.id}
+        renderItem={Thumbnail}
+        columnWrapperStyle={{
+          flex: 1,
+          justifyContent: 'space-between',
+        }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        ListEmptyComponent={emptyComponent}
+      />
     </View>
   );
 }
