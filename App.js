@@ -4,11 +4,11 @@ import Navigation from './src/Navigation';
 import {retriveData, storeData} from './src/utils/cache';
 import {getId} from './src/utils/getId';
 import {QueryClientProvider, QueryClient} from 'react-query';
+import filterArray from './src/utils/filterArray';
 
 const queryClient = new QueryClient();
 
 const initialState = {
-  data: [],
   favourite: [],
   likeId: [],
 };
@@ -23,11 +23,11 @@ function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.like:
       let newData = action.payload;
-      // storeData(newData);
+      storeData(newData);
       return {
         ...state,
-        favourite: [newData, ...state.favourite],
-        likeId: [...state.likeId, newData.id],
+        favourite: filterArray(state.favourite, newData),
+        likeId: filterArray(state.likeId, newData.id),
       };
     case ACTIONS.retrive_favourite:
       let favouriteData = action.payload;
@@ -46,18 +46,26 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [stale, dispatch] = useReducer(reducer, initialState);
+  const [_initialState, dispatch] = useReducer(reducer, initialState);
+
+  async function getAllData() {
+    await retriveData().then(newData => {
+      dispatch({type: ACTIONS.retrive_favourite, payload: newData});
+      if (newData.length > 0) {
+        getId(newData, dispatch);
+      }
+    });
+  }
 
   useEffect(() => {
-    retriveData(dispatch);
-    getId(stale, dispatch);
+    getAllData();
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <SafeAreaView style={styles.Container}>
         <StatusBar />
-        <Navigation state={stale} dispatch={dispatch} />
+        <Navigation state={_initialState} dispatch={dispatch} />
       </SafeAreaView>
     </QueryClientProvider>
   );

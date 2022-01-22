@@ -4,7 +4,7 @@ import App from '../App';
 
 describe('Root', () => {
   test('If it renders Root element', () => {
-    let home = render(<App />);
-    expect(home).toMatchSnapshot();
+    const app = render(<App />).toJSON();
+    expect(app).toMatchSnapshot();
   });
 });
