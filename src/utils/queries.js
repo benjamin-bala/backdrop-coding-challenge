@@ -12,6 +12,8 @@ export default function Queries() {
     isError,
     fetchNextPage,
     isFetchingNextPage,
+    refetch,
+    isRefetching,
   } = useInfiniteQuery('backdrop', fetchData, {
     keepPreviousData: true,
     pageParams: 0,
@@ -42,5 +44,7 @@ export default function Queries() {
   return {
     isError,
     isLoading,
+    refetch,
+    isRefetching,
   };
 }

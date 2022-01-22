@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
 import Heart from '../../assets/icons/heart';
+import {colors} from '../../utils/theme/colors';
 import {thumbnailStyle} from './style';
 
 export default function Thumbnail({item}) {
@@ -19,7 +20,7 @@ export default function Thumbnail({item}) {
       </View>
       <View style={thumbnailStyle.textbox}>
         <Text style={thumbnailStyle.text}>{item.name}</Text>
-        <Heart fill="#DE0202" outline="#DE0202" />
+        <Heart fill={colors.backgroundRed} outline={colors.backgroundRed} />
       </View>
     </View>
   );

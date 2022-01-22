@@ -1,13 +1,16 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from './Pages/Home';
-import Favourite from './Pages/Favourite';
+import Home from './Screens/Home';
+import Favourite from './Screens/Favourite';
 import Cat from './assets/icons/cat';
 import Heart from './assets/icons/heart';
+import {colors} from './utils/theme/colors';
+import fonts from './utils/theme/fonts';
+import {Dimensions} from 'react-native';
 
 const Tab = createBottomTabNavigator();
-
+const {width} = Dimensions.get('window');
 export default function Navigation(props) {
   return (
     <NavigationContainer>
@@ -26,13 +29,16 @@ export default function Navigation(props) {
           tabBarStyle: {
             paddingHorizontal: 20,
             paddingVertical: 10,
-            backgroundColor: 'white',
+            backgroundColor: colors.backgroundWhite,
             height: 100,
             borderTopColor: '#fafafa',
+            alignItems: 'center',
+            flexDirection: 'column',
           },
           tabBarLabelStyle: {
-            marginBottom: 23,
-            fontSize: 16,
+            marginBottom: width < 450 ? 23 : 10,
+            fontSize: fonts.size.font16,
+            fontFamily: fonts.type.sfproregular,
           },
         })}>
         <Tab.Screen

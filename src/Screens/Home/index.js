@@ -15,17 +15,22 @@ export default function Home(props) {
     return <SkeletonLoader />;
   }
   if (isError) {
-    return (
-      <View>
-        <Text>An error Occured Try Again</Text>
-      </View>
-    );
+    return ErrorComponent;
   }
+
   function footerComponent() {
     if (isFetchingNextPage) {
       return <LoadingIndicator />;
     }
     return null;
+  }
+
+  function ErrorComponent() {
+    return (
+      <View>
+        <Text>An error Occured Try Again</Text>
+      </View>
+    );
   }
 
   return (

@@ -1,4 +1,6 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../utils/theme/colors';
+import fonts from '../../utils/theme/fonts';
 
 export const thumbnailStyle = StyleSheet.create({
   thumbnailContainer: {
@@ -6,9 +8,9 @@ export const thumbnailStyle = StyleSheet.create({
     width: '45%',
   },
   thumbnail: {
-    backgroundColor: '#333',
+    backgroundColor: colors.backgroundBlack,
     // width: 150,
-    height: 150,
+    height: 200,
     borderRadius: 15,
   },
   textbox: {
@@ -18,7 +20,9 @@ export const thumbnailStyle = StyleSheet.create({
     paddingVertical: 7,
   },
   text: {
-    fontSize: 16,
-    color: '#212227',
+    fontSize: fonts.size.font16,
+    fontFamily: fonts.type.sfproregular,
+    color: colors.textBlack,
+    textTransform: 'capitalize',
   },
 });

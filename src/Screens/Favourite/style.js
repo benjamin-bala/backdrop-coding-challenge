@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../utils/theme/colors';
 
 export const favouriteStyle = StyleSheet.create({
   favouriteContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.backgroundWhite,
     flex: 1,
     padding: 25,
   },

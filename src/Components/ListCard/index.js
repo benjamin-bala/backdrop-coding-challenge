@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, Text, Image, TouchableHighlight} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import Heart from '../../assets/icons/heart';
 import {listStyle} from './style';
 
@@ -13,7 +19,7 @@ export default function ListCard({item, dispatch, state}) {
   });
 
   return (
-    <TouchableHighlight
+    <TouchableWithoutFeedback
       onPress={() => dispatch({type: 'FAVOURITE', payload: item})}>
       <View style={listStyle.card}>
         <View style={listStyle.thumbnailContainer}>
@@ -40,6 +46,6 @@ export default function ListCard({item, dispatch, state}) {
           />
         </View>
       </View>
-    </TouchableHighlight>
+    </TouchableWithoutFeedback>
   );
 }

@@ -1,4 +1,6 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../utils/theme/colors';
+import fonts from '../../utils/theme/fonts';
 
 export const listStyle = StyleSheet.create({
   card: {
@@ -12,8 +14,9 @@ export const listStyle = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 16,
-    color: '#000',
+    fontFamily: fonts.type.sfproregular,
+    fontSize: fonts.size.font16,
+    color: colors.textBlack,
   },
   thumbnail: {
     width: 50,
