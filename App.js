@@ -23,13 +23,11 @@ function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.like:
       let newData = action.payload;
-      storeData(newData);
+      // storeData(newData);
       return {
         ...state,
-        favourite: {
-          newData,
-          ...favourite,
-        },
+        favourite: [newData, ...state.favourite],
+        likeId: [...state.likeId, newData.id],
       };
     case ACTIONS.retrive_favourite:
       let favouriteData = action.payload;

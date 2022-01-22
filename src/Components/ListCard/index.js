@@ -13,31 +13,33 @@ export default function ListCard({item, dispatch, state}) {
   });
 
   return (
-    <View style={listStyle.card}>
-      <View style={listStyle.thumbnailContainer}>
-        <View style={listStyle.thumbnail}>
-          {item.image && (
-            <Image
-              style={listStyle.thumbnail}
-              source={{
-                uri: item.image.url,
-              }}
-              resizeMode={'cover'}
-            />
-          )}
+    <TouchableHighlight
+      onPress={() => dispatch({type: 'FAVOURITE', payload: item})}>
+      <View style={listStyle.card}>
+        <View style={listStyle.thumbnailContainer}>
+          <View style={listStyle.thumbnail}>
+            {item.image && (
+              <Image
+                style={listStyle.thumbnail}
+                source={{
+                  uri: item.image.url,
+                }}
+                resizeMode={'cover'}
+              />
+            )}
+          </View>
+          <View>
+            <Text style={listStyle.text}>{item.name}</Text>
+          </View>
         </View>
-        <View>
-          <Text style={listStyle.text}>{item.name}</Text>
+
+        <View style={listStyle.like}>
+          <Heart
+            fill={liked ? 'red' : 'none'}
+            stroke={liked ? 'red' : '#E5E5E5'}
+          />
         </View>
       </View>
-      <TouchableHighlight
-        onPress={() => dispatch({type: 'FAVOURITE', payload: item})}
-        style={listStyle.like}>
-        <Heart
-          fill={liked ? 'red' : 'none'}
-          stroke={liked ? 'red' : '#E5E5E5'}
-        />
-      </TouchableHighlight>
-    </View>
+    </TouchableHighlight>
   );
 }

@@ -4,14 +4,11 @@ import ListCard from '../../Components/ListCard';
 import TitleText from '../../Components/TitleText';
 import {homeStyle} from './style';
 import Queries from '../../utils/queries';
-
 import {LoadingIndicator} from '../../Components/LoadingIndicator';
 import SkeletonLoader from '../../Components/SkeletonLoader';
 
 export default function Home(props) {
   let {data, isLoading, isError, isFetchingNextPage, handleLoad} = Queries();
-
-  console.log('datta', data);
 
   if (isLoading) {
     return <SkeletonLoader />;
