@@ -1,5 +1,6 @@
 const config = {
   preset: 'react-native',
+  verbose: true,
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleDirectories: ['./node_modules', './src'],
   moduleNameMapper: {

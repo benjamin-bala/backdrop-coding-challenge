@@ -1,5 +1,5 @@
 {
-  "name": "backdrop",
+  "name": "pet_directory",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -23,6 +23,7 @@
     "react-native-cache": "^2.0.2",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
+    "react-native-splash-screen": "^3.3.0",
     "react-native-svg": "^12.1.1",
     "react-query": "^3.34.8",
     "ts-jest": "^27.1.3"

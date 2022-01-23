@@ -5,6 +5,7 @@ import {retriveData, storeData} from './src/utils/cache';
 import {getId} from './src/utils/getId';
 import {QueryClientProvider, QueryClient} from 'react-query';
 import filterArray from './src/utils/filterArray';
+import SplashScreen from 'react-native-splash-screen';
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,7 @@ function App() {
   }
 
   useEffect(() => {
+    SplashScreen.hide();
     getAllData();
   }, []);
 
